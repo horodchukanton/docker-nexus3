@@ -1,5 +1,9 @@
 name: publish
-on: [push]
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   publish-docker-image:
     runs-on: ubuntu-latest
@@ -11,7 +15,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ github.token }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the ${{ github.repository }} Docker image
         run: |
